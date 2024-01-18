@@ -1,32 +1,27 @@
 import React from "react";
 
-function SideBar() {
-  let headerComponents: any = [
-    {
-      comp: "Summary",
-    },
-    {
-      comp: "About",
-    },
-    {
-      comp: "Portfolio",
-    },
-    {
-      comp: "Experience",
-    },
-    {
-      comp: "Skills",
-    },
-    {
-      comp: "Contact",
-    },
-  ];
+function SideBar(props: any) {
+  const scrollHandler = (elmRef: any) => {
+    window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
+  };
+
   return (
-    <div>
-      {headerComponents.map((res: any, i: any) => {
-        return <div key={i} className="">{res.comp}</div>;
-      })}
-    </div>
+    <header>
+      <ul className="cursor-pointer">
+        {props.headerComponents.map((res: any, i: any) => {
+          return (
+            <div
+              key={i}
+              onClick={() => {
+                scrollHandler(res.reference);
+              }}
+            >
+              {res.name}
+            </div>
+          );
+        })}
+      </ul>
+    </header>
   );
 }
 
